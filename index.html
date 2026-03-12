@@ -1,0 +1,861 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Mi Landing Page Editable</title>
+  <style>
+    :root {
+      --bg: #0f172a;
+      --card: #111827;
+      --soft: #1f2937;
+      --text: #e5e7eb;
+      --muted: #9ca3af;
+      --primary: #22c55e;
+      --primary-dark: #16a34a;
+      --danger: #ef4444;
+      --white: #ffffff;
+      --shadow: 0 10px 30px rgba(0,0,0,.18);
+      --radius: 18px;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: Arial, Helvetica, sans-serif;
+    }
+
+    body {
+      background: linear-gradient(180deg, #0f172a 0%, #111827 100%);
+      color: var(--text);
+      line-height: 1.5;
+    }
+
+    a {
+      text-decoration: none;
+      color: inherit;
+    }
+
+    .container {
+      width: min(1100px, 92%);
+      margin: 0 auto;
+    }
+
+    .topbar {
+      position: sticky;
+      top: 0;
+      z-index: 50;
+      backdrop-filter: blur(12px);
+      background: rgba(15, 23, 42, .78);
+      border-bottom: 1px solid rgba(255,255,255,.08);
+    }
+
+    .topbar-inner {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 16px 0;
+      gap: 16px;
+    }
+
+    .brand {
+      font-size: 1.2rem;
+      font-weight: bold;
+      color: var(--white);
+    }
+
+    .nav {
+      display: flex;
+      gap: 14px;
+      align-items: center;
+      flex-wrap: wrap;
+    }
+
+    .nav a, .nav button {
+      color: var(--text);
+      background: transparent;
+      border: none;
+      cursor: pointer;
+      font-size: .95rem;
+    }
+
+    .btn {
+      background: var(--primary);
+      color: #052e16;
+      padding: 11px 18px;
+      border: none;
+      border-radius: 999px;
+      cursor: pointer;
+      font-weight: bold;
+      transition: .2s ease;
+      box-shadow: var(--shadow);
+    }
+
+    .btn:hover {
+      background: var(--primary-dark);
+      color: var(--white);
+      transform: translateY(-1px);
+    }
+
+    .btn.secondary {
+      background: transparent;
+      border: 1px solid rgba(255,255,255,.16);
+      color: var(--text);
+      box-shadow: none;
+    }
+
+    .hero {
+      padding: 72px 0 48px;
+    }
+
+    .hero-grid {
+      display: grid;
+      grid-template-columns: 1.1fr .9fr;
+      gap: 28px;
+      align-items: center;
+    }
+
+    .hero-card, .panel, .feature, .pricing-card, .testimonial, .footer-card, .dashboard-card {
+      background: rgba(17, 24, 39, .8);
+      border: 1px solid rgba(255,255,255,.07);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+    }
+
+    .hero-card {
+      padding: 34px;
+    }
+
+    .tag {
+      display: inline-block;
+      background: rgba(34,197,94,.15);
+      color: #86efac;
+      padding: 8px 12px;
+      border-radius: 999px;
+      margin-bottom: 16px;
+      font-size: .9rem;
+    }
+
+    h1 {
+      font-size: clamp(2rem, 5vw, 3.8rem);
+      line-height: 1.08;
+      margin-bottom: 16px;
+    }
+
+    .hero p {
+      color: var(--muted);
+      font-size: 1.05rem;
+      margin-bottom: 22px;
+    }
+
+    .hero-actions {
+      display: flex;
+      gap: 12px;
+      flex-wrap: wrap;
+      margin-bottom: 18px;
+    }
+
+    .stats {
+      display: flex;
+      gap: 16px;
+      flex-wrap: wrap;
+      margin-top: 16px;
+    }
+
+    .stat {
+      background: rgba(255,255,255,.04);
+      padding: 14px 16px;
+      border-radius: 14px;
+      min-width: 120px;
+    }
+
+    .stat strong {
+      display: block;
+      font-size: 1.2rem;
+      color: var(--white);
+    }
+
+    .panel {
+      padding: 24px;
+    }
+
+    .mockup {
+      background: linear-gradient(180deg, #1e293b, #0f172a);
+      border-radius: 16px;
+      padding: 18px;
+      min-height: 360px;
+    }
+
+    .mockup-box {
+      background: rgba(255,255,255,.06);
+      border-radius: 12px;
+      padding: 16px;
+      margin-bottom: 12px;
+    }
+
+    section {
+      padding: 28px 0 16px;
+    }
+
+    .section-title {
+      text-align: center;
+      margin-bottom: 24px;
+    }
+
+    .section-title h2 {
+      font-size: clamp(1.6rem, 3vw, 2.4rem);
+      margin-bottom: 8px;
+    }
+
+    .section-title p {
+      color: var(--muted);
+      max-width: 680px;
+      margin: 0 auto;
+    }
+
+    .grid-3 {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 18px;
+    }
+
+    .grid-2 {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 18px;
+    }
+
+    .feature, .pricing-card, .testimonial, .dashboard-card {
+      padding: 22px;
+    }
+
+    .feature h3, .pricing-card h3, .dashboard-card h3 {
+      margin-bottom: 10px;
+    }
+
+    .feature p, .pricing-card p, .testimonial p, .dashboard-card p {
+      color: var(--muted);
+    }
+
+    .pricing-price {
+      font-size: 2rem;
+      font-weight: bold;
+      margin: 10px 0;
+      color: var(--white);
+    }
+
+    .list {
+      margin: 16px 0;
+      padding-left: 18px;
+      color: var(--muted);
+    }
+
+    .cta {
+      padding: 40px 0;
+    }
+
+    .footer-card {
+      padding: 28px;
+      margin: 24px 0 34px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 20px;
+      flex-wrap: wrap;
+    }
+
+    .muted {
+      color: var(--muted);
+    }
+
+    .editor-bar {
+      position: fixed;
+      right: 16px;
+      bottom: 16px;
+      z-index: 99;
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+      justify-content: flex-end;
+    }
+
+    .editor-bar button {
+      border-radius: 999px;
+      padding: 10px 14px;
+      border: none;
+      cursor: pointer;
+      font-weight: bold;
+      box-shadow: var(--shadow);
+    }
+
+    .edit-btn { background: #f59e0b; color: #1f2937; }
+    .save-btn { background: #3b82f6; color: white; }
+    .reset-btn { background: var(--danger); color: white; }
+
+    .editable-on [data-editable="true"] {
+      outline: 2px dashed rgba(245, 158, 11, .8);
+      outline-offset: 4px;
+      border-radius: 8px;
+      cursor: text;
+    }
+
+    .auth-modal {
+      position: fixed;
+      inset: 0;
+      background: rgba(0,0,0,.62);
+      display: none;
+      align-items: center;
+      justify-content: center;
+      z-index: 100;
+      padding: 20px;
+    }
+
+    .auth-modal.active {
+      display: flex;
+    }
+
+    .auth-card {
+      width: min(460px, 100%);
+      background: #111827;
+      border: 1px solid rgba(255,255,255,.08);
+      border-radius: 18px;
+      padding: 24px;
+      box-shadow: var(--shadow);
+    }
+
+    .auth-card h3 {
+      margin-bottom: 14px;
+    }
+
+    .tabs {
+      display: flex;
+      gap: 10px;
+      margin-bottom: 16px;
+    }
+
+    .tab {
+      flex: 1;
+      padding: 10px;
+      border-radius: 12px;
+      border: 1px solid rgba(255,255,255,.1);
+      background: rgba(255,255,255,.04);
+      color: var(--text);
+      cursor: pointer;
+    }
+
+    .tab.active {
+      background: var(--primary);
+      color: #052e16;
+      border-color: transparent;
+      font-weight: bold;
+    }
+
+    .form-group {
+      display: flex;
+      flex-direction: column;
+      gap: 7px;
+      margin-bottom: 14px;
+    }
+
+    .form-group input {
+      padding: 12px 14px;
+      border-radius: 12px;
+      border: 1px solid rgba(255,255,255,.1);
+      background: rgba(255,255,255,.04);
+      color: var(--text);
+    }
+
+    .form-row {
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+
+    .form-row .btn, .form-row .btn.secondary {
+      flex: 1;
+    }
+
+    .dashboard {
+      display: none;
+      padding: 24px 0 40px;
+    }
+
+    .dashboard.active {
+      display: block;
+    }
+
+    .dashboard-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 16px;
+      margin-top: 18px;
+    }
+
+    .badge {
+      display: inline-block;
+      padding: 6px 10px;
+      border-radius: 999px;
+      background: rgba(59,130,246,.16);
+      color: #93c5fd;
+      font-size: .88rem;
+      margin-top: 8px;
+    }
+
+    .notice {
+      margin-top: 14px;
+      padding: 12px 14px;
+      border-radius: 12px;
+      background: rgba(59,130,246,.12);
+      color: #bfdbfe;
+      font-size: .95rem;
+    }
+
+    .small {
+      font-size: .9rem;
+    }
+
+    @media (max-width: 900px) {
+      .hero-grid, .grid-3, .grid-2, .dashboard-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .topbar-inner {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header class="topbar">
+    <div class="container topbar-inner">
+      <div class="brand" data-editable="true">TuMarca</div>
+      <nav class="nav">
+        <a href="#inicio">Inicio</a>
+        <a href="#beneficios">Beneficios</a>
+        <a href="#planes">Planes</a>
+        <a href="#testimonios">Testimonios</a>
+        <button id="openAuth">Ingresar</button>
+      </nav>
+    </div>
+  </header>
+
+  <main id="inicio">
+    <section class="hero">
+      <div class="container hero-grid">
+        <div class="hero-card">
+          <span class="tag" data-editable="true">Landing editable y moderna</span>
+          <h1 data-editable="true">Crea una presencia profesional sin complicarte</h1>
+          <p data-editable="true">Esta página está hecha para que una persona novata pueda cambiar textos fácilmente. También incluye un acceso básico para que otras personas puedan registrarse e iniciar sesión en este mismo navegador.</p>
+          <div class="hero-actions">
+            <a href="#planes" class="btn" data-editable="true">Empezar ahora</a>
+            <a href="#beneficios" class="btn secondary" data-editable="true">Ver más</a>
+          </div>
+          <div class="stats">
+            <div class="stat">
+              <strong data-editable="true">+500</strong>
+              <span class="muted" data-editable="true">usuarios</span>
+            </div>
+            <div class="stat">
+              <strong data-editable="true">24/7</strong>
+              <span class="muted" data-editable="true">disponibilidad</span>
+            </div>
+            <div class="stat">
+              <strong data-editable="true">Fácil</strong>
+              <span class="muted" data-editable="true">de editar</span>
+            </div>
+          </div>
+        </div>
+        <div class="panel">
+          <div class="mockup">
+            <div class="mockup-box">
+              <h3 data-editable="true">Panel de ejemplo</h3>
+              <p class="muted" data-editable="true">Puedes usar este espacio para mostrar tu producto, una imagen, una promoción o un formulario.</p>
+            </div>
+            <div class="mockup-box">
+              <p data-editable="true">Aquí podrías poner una captura de pantalla, una foto de tu negocio o un video incrustado.</p>
+            </div>
+            <div class="mockup-box">
+              <p data-editable="true">Todo el contenido marcado como editable se puede cambiar con el botón de edición.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="beneficios">
+      <div class="container">
+        <div class="section-title">
+          <h2 data-editable="true">Beneficios principales</h2>
+          <p data-editable="true">Puedes personalizar esta landing para un negocio, portafolio, tienda, servicio profesional o proyecto escolar.</p>
+        </div>
+        <div class="grid-3">
+          <article class="feature">
+            <h3 data-editable="true">Fácil de modificar</h3>
+            <p data-editable="true">Activa el modo edición y cambia títulos, párrafos y botones sin tocar código.</p>
+          </article>
+          <article class="feature">
+            <h3 data-editable="true">Diseño adaptable</h3>
+            <p data-editable="true">Se ve bien en celular, tablet y computadora.</p>
+          </article>
+          <article class="feature">
+            <h3 data-editable="true">Acceso básico integrado</h3>
+            <p data-editable="true">Incluye registro e inicio de sesión usando almacenamiento local del navegador.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section id="planes">
+      <div class="container">
+        <div class="section-title">
+          <h2 data-editable="true">Planes o paquetes</h2>
+          <p data-editable="true">Puedes reemplazar esta sección por tus servicios, productos o precios reales.</p>
+        </div>
+        <div class="grid-3">
+          <article class="pricing-card">
+            <h3 data-editable="true">Básico</h3>
+            <div class="pricing-price" data-editable="true">$199</div>
+            <p data-editable="true">Ideal para empezar</p>
+            <ul class="list">
+              <li data-editable="true">1 servicio principal</li>
+              <li data-editable="true">Soporte por mensaje</li>
+              <li data-editable="true">Cambios básicos</li>
+            </ul>
+            <button class="btn" data-editable="true">Elegir</button>
+          </article>
+          <article class="pricing-card">
+            <h3 data-editable="true">Pro</h3>
+            <div class="pricing-price" data-editable="true">$499</div>
+            <p data-editable="true">Para crecer más rápido</p>
+            <ul class="list">
+              <li data-editable="true">Más funciones</li>
+              <li data-editable="true">Atención prioritaria</li>
+              <li data-editable="true">Personalización ampliada</li>
+            </ul>
+            <button class="btn" data-editable="true">Elegir</button>
+          </article>
+          <article class="pricing-card">
+            <h3 data-editable="true">Premium</h3>
+            <div class="pricing-price" data-editable="true">$999</div>
+            <p data-editable="true">Para una presencia completa</p>
+            <ul class="list">
+              <li data-editable="true">Diseño avanzado</li>
+              <li data-editable="true">Mayor soporte</li>
+              <li data-editable="true">Asesoría personalizada</li>
+            </ul>
+            <button class="btn" data-editable="true">Elegir</button>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section id="testimonios">
+      <div class="container">
+        <div class="section-title">
+          <h2 data-editable="true">Lo que dice la gente</h2>
+          <p data-editable="true">También puedes usar esta sección para mostrar reseñas, logros o casos de éxito.</p>
+        </div>
+        <div class="grid-2">
+          <article class="testimonial">
+            <p data-editable="true">Muy fácil de usar. Cambié todo el contenido sin saber diseño web.</p>
+            <span class="badge" data-editable="true">Cliente 1</span>
+          </article>
+          <article class="testimonial">
+            <p data-editable="true">La base ya está lista y eso ayuda mucho para empezar rápido.</p>
+            <span class="badge" data-editable="true">Cliente 2</span>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="cta">
+      <div class="container">
+        <div class="footer-card">
+          <div>
+            <h2 data-editable="true">¿Listo para personalizar tu página?</h2>
+            <p class="muted" data-editable="true">Puedes cambiar textos, precios, títulos, colores y usar esta plantilla como base de tu proyecto.</p>
+          </div>
+          <button class="btn" id="openAuthBottom" data-editable="true">Crear cuenta</button>
+        </div>
+      </div>
+    </section>
+
+    <section class="dashboard" id="dashboardSection">
+      <div class="container">
+        <div class="section-title">
+          <h2>Área de usuario</h2>
+          <p class="muted">Se muestra cuando alguien inicia sesión correctamente en este navegador.</p>
+        </div>
+
+        <div class="dashboard-card">
+          <h3 id="welcomeUser">Bienvenido</h3>
+          <p>Esta es una zona básica de ejemplo. Puedes convertirla en panel, perfil, membresía, cursos, archivos o pedidos.</p>
+          <div class="notice">
+            Importante: el sistema de usuarios de esta demo guarda la información solo en el navegador. Para usuarios reales desde internet, necesitas base de datos y backend.
+          </div>
+        </div>
+
+        <div class="dashboard-grid">
+          <article class="dashboard-card">
+            <h3>Perfil</h3>
+            <p>Visualiza información del usuario conectado.</p>
+          </article>
+          <article class="dashboard-card">
+            <h3>Contenido privado</h3>
+            <p>Muestra información solo al iniciar sesión.</p>
+          </article>
+          <article class="dashboard-card">
+            <h3>Configuración</h3>
+            <p>Desde aquí podrías agregar edición avanzada o preferencias.</p>
+          </article>
+        </div>
+
+        <div style="margin-top: 18px; display: flex; gap: 10px; flex-wrap: wrap;">
+          <button class="btn secondary" id="logoutBtn">Cerrar sesión</button>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <div class="auth-modal" id="authModal">
+    <div class="auth-card">
+      <h3>Acceso de usuarios</h3>
+      <div class="tabs">
+        <button class="tab active" id="tabLogin">Iniciar sesión</button>
+        <button class="tab" id="tabRegister">Registrarse</button>
+      </div>
+
+      <form id="authForm">
+        <div class="form-group" id="nameGroup" style="display:none;">
+          <label for="name">Nombre</label>
+          <input type="text" id="name" placeholder="Tu nombre" />
+        </div>
+
+        <div class="form-group">
+          <label for="email">Correo</label>
+          <input type="email" id="email" placeholder="correo@ejemplo.com" required />
+        </div>
+
+        <div class="form-group">
+          <label for="password">Contraseña</label>
+          <input type="password" id="password" placeholder="Tu contraseña" required />
+        </div>
+
+        <div class="form-row">
+          <button type="submit" class="btn" id="submitAuth">Entrar</button>
+          <button type="button" class="btn secondary" id="closeAuth">Cerrar</button>
+        </div>
+      </form>
+
+      <p class="notice small" id="authMessage">Puedes crear usuarios de prueba desde este navegador.</p>
+    </div>
+  </div>
+
+  <div class="editor-bar">
+    <button class="edit-btn" id="toggleEdit">Activar edición</button>
+    <button class="save-btn" id="saveContent">Guardar cambios</button>
+    <button class="reset-btn" id="resetContent">Restablecer</button>
+  </div>
+
+  <script>
+    const body = document.body;
+    const editableElements = [...document.querySelectorAll('[data-editable="true"]')];
+    const toggleEditBtn = document.getElementById('toggleEdit');
+    const saveContentBtn = document.getElementById('saveContent');
+    const resetContentBtn = document.getElementById('resetContent');
+
+    const authModal = document.getElementById('authModal');
+    const openAuth = document.getElementById('openAuth');
+    const openAuthBottom = document.getElementById('openAuthBottom');
+    const closeAuth = document.getElementById('closeAuth');
+    const authForm = document.getElementById('authForm');
+    const authMessage = document.getElementById('authMessage');
+    const tabLogin = document.getElementById('tabLogin');
+    const tabRegister = document.getElementById('tabRegister');
+    const nameGroup = document.getElementById('nameGroup');
+    const submitAuth = document.getElementById('submitAuth');
+    const dashboardSection = document.getElementById('dashboardSection');
+    const welcomeUser = document.getElementById('welcomeUser');
+    const logoutBtn = document.getElementById('logoutBtn');
+
+    let isEditMode = false;
+    let authMode = 'login';
+
+    const STORAGE_KEY_CONTENT = 'landingEditableContent_v1';
+    const STORAGE_KEY_USERS = 'landingUsers_v1';
+    const STORAGE_KEY_SESSION = 'landingSession_v1';
+
+    const defaultContent = editableElements.map((el, index) => ({
+      index,
+      html: el.innerHTML
+    }));
+
+    function enableEditMode() {
+      isEditMode = !isEditMode;
+      body.classList.toggle('editable-on', isEditMode);
+      editableElements.forEach(el => {
+        el.contentEditable = isEditMode;
+      });
+      toggleEditBtn.textContent = isEditMode ? 'Desactivar edición' : 'Activar edición';
+    }
+
+    function saveContent() {
+      const content = editableElements.map((el, index) => ({
+        index,
+        html: el.innerHTML
+      }));
+      localStorage.setItem(STORAGE_KEY_CONTENT, JSON.stringify(content));
+      alert('Cambios guardados en este navegador.');
+    }
+
+    function loadContent() {
+      const saved = localStorage.getItem(STORAGE_KEY_CONTENT);
+      if (!saved) return;
+      try {
+        const parsed = JSON.parse(saved);
+        parsed.forEach(item => {
+          if (editableElements[item.index]) {
+            editableElements[item.index].innerHTML = item.html;
+          }
+        });
+      } catch (error) {
+        console.error('Error al cargar contenido guardado:', error);
+      }
+    }
+
+    function resetContent() {
+      const confirmed = confirm('¿Seguro que quieres restablecer el contenido original?');
+      if (!confirmed) return;
+
+      defaultContent.forEach(item => {
+        if (editableElements[item.index]) {
+          editableElements[item.index].innerHTML = item.html;
+        }
+      });
+      localStorage.removeItem(STORAGE_KEY_CONTENT);
+      alert('Contenido restablecido.');
+    }
+
+    function openAuthModal() {
+      authModal.classList.add('active');
+    }
+
+    function closeAuthModal() {
+      authModal.classList.remove('active');
+      authForm.reset();
+      authMessage.textContent = 'Puedes crear usuarios de prueba desde este navegador.';
+    }
+
+    function setAuthMode(mode) {
+      authMode = mode;
+      const isRegister = mode === 'register';
+      nameGroup.style.display = isRegister ? 'flex' : 'none';
+      submitAuth.textContent = isRegister ? 'Crear cuenta' : 'Entrar';
+      tabLogin.classList.toggle('active', !isRegister);
+      tabRegister.classList.toggle('active', isRegister);
+      authMessage.textContent = isRegister
+        ? 'Crea un usuario local de prueba.'
+        : 'Ingresa con un usuario ya registrado en este navegador.';
+    }
+
+    function getUsers() {
+      return JSON.parse(localStorage.getItem(STORAGE_KEY_USERS) || '[]');
+    }
+
+    function saveUsers(users) {
+      localStorage.setItem(STORAGE_KEY_USERS, JSON.stringify(users));
+    }
+
+    function saveSession(user) {
+      localStorage.setItem(STORAGE_KEY_SESSION, JSON.stringify(user));
+    }
+
+    function getSession() {
+      return JSON.parse(localStorage.getItem(STORAGE_KEY_SESSION) || 'null');
+    }
+
+    function clearSession() {
+      localStorage.removeItem(STORAGE_KEY_SESSION);
+    }
+
+    function updateUIFromSession() {
+      const session = getSession();
+      if (session) {
+        openAuth.textContent = 'Mi cuenta';
+        welcomeUser.textContent = `Bienvenido, ${session.name || session.email}`;
+        dashboardSection.classList.add('active');
+      } else {
+        openAuth.textContent = 'Ingresar';
+        welcomeUser.textContent = 'Bienvenido';
+        dashboardSection.classList.remove('active');
+      }
+    }
+
+    authForm.addEventListener('submit', function (e) {
+      e.preventDefault();
+
+      const name = document.getElementById('name').value.trim();
+      const email = document.getElementById('email').value.trim().toLowerCase();
+      const password = document.getElementById('password').value;
+
+      const users = getUsers();
+
+      if (authMode === 'register') {
+        if (!name) {
+          authMessage.textContent = 'Escribe un nombre.';
+          return;
+        }
+
+        const exists = users.some(user => user.email === email);
+        if (exists) {
+          authMessage.textContent = 'Ese correo ya está registrado.';
+          return;
+        }
+
+        const newUser = { name, email, password };
+        users.push(newUser);
+        saveUsers(users);
+        saveSession(newUser);
+        authMessage.textContent = 'Cuenta creada correctamente.';
+        updateUIFromSession();
+        setTimeout(closeAuthModal, 400);
+        return;
+      }
+
+      const user = users.find(user => user.email === email && user.password === password);
+      if (!user) {
+        authMessage.textContent = 'Correo o contraseña incorrectos.';
+        return;
+      }
+
+      saveSession(user);
+      authMessage.textContent = 'Inicio de sesión correcto.';
+      updateUIFromSession();
+      setTimeout(closeAuthModal, 400);
+    });
+
+    toggleEditBtn.addEventListener('click', enableEditMode);
+    saveContentBtn.addEventListener('click', saveContent);
+    resetContentBtn.addEventListener('click', resetContent);
+    openAuth.addEventListener('click', openAuthModal);
+    openAuthBottom.addEventListener('click', openAuthModal);
+    closeAuth.addEventListener('click', closeAuthModal);
+    tabLogin.addEventListener('click', () => setAuthMode('login'));
+    tabRegister.addEventListener('click', () => setAuthMode('register'));
+    logoutBtn.addEventListener('click', () => {
+      clearSession();
+      updateUIFromSession();
+      alert('Sesión cerrada.');
+    });
+
+    authModal.addEventListener('click', function(e) {
+      if (e.target === authModal) closeAuthModal();
+    });
+
+    loadContent();
+    updateUIFromSession();
+  </script>
+</body>
+</html>
