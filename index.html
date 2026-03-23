@@ -3,33 +3,50 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Mi Landing Page Editable</title>
+  <title>Arborea | Landing Page Editable</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+
   <style>
     :root {
-      --bg: #0f172a;
-      --card: #111827;
-      --soft: #1f2937;
-      --text: #e5e7eb;
-      --muted: #9ca3af;
-      --primary: #22c55e;
-      --primary-dark: #16a34a;
-      --danger: #ef4444;
-      --white: #ffffff;
-      --shadow: 0 10px 30px rgba(0,0,0,.18);
-      --radius: 18px;
+      --color-fondo: #f5f5dc;
+      --color-superficie: #fffdf7;
+      --color-texto: #3e2723;
+      --color-secundario: #6b5b52;
+      --color-acento: #b89b7a;
+      --color-borde: rgba(62, 39, 35, 0.12);
+      --sombra: 0 14px 40px rgba(62, 39, 35, 0.08);
+      --radio-grande: 28px;
+      --radio-mediano: 20px;
+      --radio-boton: 999px;
+      --ancho-maximo: 1180px;
     }
 
     * {
       box-sizing: border-box;
       margin: 0;
       padding: 0;
-      font-family: Arial, Helvetica, sans-serif;
+    }
+
+    html {
+      scroll-behavior: smooth;
     }
 
     body {
-      background: linear-gradient(180deg, #0f172a 0%, #111827 100%);
-      color: var(--text);
-      line-height: 1.5;
+      font-family: 'Inter', sans-serif;
+      background: var(--color-fondo);
+      color: var(--color-texto);
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+      text-rendering: optimizeLegibility;
+    }
+
+    img {
+      display: block;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
     }
 
     a {
@@ -37,825 +54,770 @@
       color: inherit;
     }
 
+    button,
+    input,
+    textarea {
+      font: inherit;
+    }
+
     .container {
-      width: min(1100px, 92%);
+      width: min(100% - 32px, var(--ancho-maximo));
       margin: 0 auto;
     }
 
-    .topbar {
-      position: sticky;
-      top: 0;
-      z-index: 50;
-      backdrop-filter: blur(12px);
-      background: rgba(15, 23, 42, .78);
-      border-bottom: 1px solid rgba(255,255,255,.08);
-    }
-
-    .topbar-inner {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      padding: 16px 0;
-      gap: 16px;
-    }
-
-    .brand {
-      font-size: 1.2rem;
-      font-weight: bold;
-      color: var(--white);
-    }
-
-    .nav {
-      display: flex;
-      gap: 14px;
-      align-items: center;
-      flex-wrap: wrap;
-    }
-
-    .nav a, .nav button {
-      color: var(--text);
-      background: transparent;
-      border: none;
-      cursor: pointer;
-      font-size: .95rem;
-    }
-
-    .btn {
-      background: var(--primary);
-      color: #052e16;
-      padding: 11px 18px;
-      border: none;
-      border-radius: 999px;
-      cursor: pointer;
-      font-weight: bold;
-      transition: .2s ease;
-      box-shadow: var(--shadow);
-    }
-
-    .btn:hover {
-      background: var(--primary-dark);
-      color: var(--white);
-      transform: translateY(-1px);
-    }
-
-    .btn.secondary {
-      background: transparent;
-      border: 1px solid rgba(255,255,255,.16);
-      color: var(--text);
-      box-shadow: none;
-    }
-
-    .hero {
-      padding: 72px 0 48px;
-    }
-
-    .hero-grid {
-      display: grid;
-      grid-template-columns: 1.1fr .9fr;
-      gap: 28px;
-      align-items: center;
-    }
-
-    .hero-card, .panel, .feature, .pricing-card, .testimonial, .footer-card, .dashboard-card {
-      background: rgba(17, 24, 39, .8);
-      border: 1px solid rgba(255,255,255,.07);
-      border-radius: var(--radius);
-      box-shadow: var(--shadow);
-    }
-
-    .hero-card {
-      padding: 34px;
+    .section {
+      padding: 100px 0;
     }
 
     .tag {
       display: inline-block;
-      background: rgba(34,197,94,.15);
-      color: #86efac;
-      padding: 8px 12px;
-      border-radius: 999px;
-      margin-bottom: 16px;
-      font-size: .9rem;
+      padding: 10px 16px;
+      border-radius: var(--radio-boton);
+      border: 1px solid var(--color-borde);
+      color: var(--color-secundario);
+      background: rgba(255,255,255,0.5);
+      margin-bottom: 18px;
+      font-size: 14px;
     }
 
-    h1 {
-      font-size: clamp(2rem, 5vw, 3.8rem);
-      line-height: 1.08;
+    .titulo-seccion {
+      font-size: clamp(2rem, 4vw, 3.5rem);
+      line-height: 1.05;
+      letter-spacing: -0.04em;
+      font-weight: 800;
       margin-bottom: 16px;
+      max-width: 11ch;
+    }
+
+    .texto-seccion {
+      color: var(--color-secundario);
+      max-width: 62ch;
+      font-size: 1rem;
+    }
+
+    header {
+      position: sticky;
+      top: 0;
+      z-index: 30;
+      background: rgba(245,245,220,0.86);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid rgba(62,39,35,0.08);
+    }
+
+    .nav {
+      min-height: 82px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 16px;
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      font-weight: 800;
+      letter-spacing: 0.16em;
+      font-size: 0.95rem;
+    }
+
+    .logo {
+      width: 48px;
+      height: 48px;
+      border: 2px solid var(--color-texto);
+      border-radius: 14px;
+      position: relative;
+      background: var(--color-superficie);
+      overflow: hidden;
+      flex: none;
+    }
+
+    .logo::before {
+      content: "";
+      position: absolute;
+      left: 50%;
+      transform: translateX(-50%);
+      top: 11px;
+      width: 22px;
+      height: 24px;
+      border-left: 3px solid var(--color-texto);
+      border-right: 3px solid var(--color-texto);
+    }
+
+    .logo::after {
+      content: "";
+      position: absolute;
+      top: 4px;
+      left: 50%;
+      transform: translateX(-50%) rotate(45deg);
+      width: 20px;
+      height: 20px;
+      border-top: 3px solid var(--color-texto);
+      background: transparent;
+    }
+
+    .menu {
+      display: flex;
+      gap: 24px;
+      color: var(--color-secundario);
+      font-size: 0.95rem;
+    }
+
+    .menu a:hover {
+      color: var(--color-texto);
+    }
+
+    .hero {
+      padding: 70px 0 40px;
+    }
+
+    .hero-grid {
+      display: grid;
+      grid-template-columns: 1.05fr 0.95fr;
+      gap: 32px;
+      align-items: center;
+    }
+
+    .hero h1 {
+      font-size: clamp(3rem, 7vw, 6rem);
+      line-height: 0.95;
+      letter-spacing: -0.06em;
+      font-weight: 800;
+      max-width: 9ch;
+      margin-bottom: 20px;
     }
 
     .hero p {
-      color: var(--muted);
+      color: var(--color-secundario);
+      max-width: 58ch;
       font-size: 1.05rem;
-      margin-bottom: 22px;
+      margin-bottom: 28px;
     }
 
-    .hero-actions {
+    .botones {
       display: flex;
-      gap: 12px;
+      gap: 14px;
       flex-wrap: wrap;
-      margin-bottom: 18px;
+      margin-bottom: 30px;
     }
 
-    .stats {
+    .boton {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 54px;
+      padding: 0 22px;
+      border-radius: var(--radio-boton);
+      font-weight: 700;
+      transition: 0.25s ease;
+    }
+
+    .boton:hover {
+      transform: translateY(-2px);
+    }
+
+    .boton-primario {
+      background: var(--color-texto);
+      color: white;
+      box-shadow: var(--sombra);
+    }
+
+    .boton-secundario {
+      background: rgba(255,255,255,0.45);
+      border: 1px solid var(--color-borde);
+      color: var(--color-texto);
+    }
+
+    .hero-cards {
       display: flex;
-      gap: 16px;
       flex-wrap: wrap;
-      margin-top: 16px;
+      gap: 14px;
     }
 
-    .stat {
-      background: rgba(255,255,255,.04);
-      padding: 14px 16px;
-      border-radius: 14px;
-      min-width: 120px;
+    .mini-card {
+      background: rgba(255,255,255,0.55);
+      border: 1px solid var(--color-borde);
+      border-radius: 18px;
+      padding: 16px 18px;
+      min-width: 180px;
     }
 
-    .stat strong {
+    .mini-card span {
       display: block;
-      font-size: 1.2rem;
-      color: var(--white);
+      color: var(--color-secundario);
+      font-size: 0.9rem;
+      margin-bottom: 4px;
     }
 
-    .panel {
-      padding: 24px;
+    .mini-card strong {
+      font-size: 1rem;
     }
 
-    .mockup {
-      background: linear-gradient(180deg, #1e293b, #0f172a);
-      border-radius: 16px;
-      padding: 18px;
-      min-height: 360px;
+    .hero-imagen {
+      position: relative;
+      min-height: 620px;
+      border-radius: 34px;
+      overflow: hidden;
+      box-shadow: var(--sombra);
+      background: var(--color-superficie);
     }
 
-    .mockup-box {
-      background: rgba(255,255,255,.06);
-      border-radius: 12px;
+    .nota-flotante {
+      position: absolute;
+      left: 20px;
+      bottom: 20px;
+      max-width: 270px;
+      background: rgba(255,255,255,0.84);
+      border: 1px solid var(--color-borde);
+      border-radius: 22px;
       padding: 16px;
-      margin-bottom: 12px;
+      box-shadow: var(--sombra);
+      backdrop-filter: blur(10px);
     }
 
-    section {
-      padding: 28px 0 16px;
+    .nota-flotante small {
+      display: block;
+      color: var(--color-secundario);
+      margin-bottom: 6px;
     }
 
-    .section-title {
-      text-align: center;
-      margin-bottom: 24px;
-    }
-
-    .section-title h2 {
-      font-size: clamp(1.6rem, 3vw, 2.4rem);
-      margin-bottom: 8px;
-    }
-
-    .section-title p {
-      color: var(--muted);
-      max-width: 680px;
-      margin: 0 auto;
-    }
-
-    .grid-3 {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 18px;
+    .nota-flotante p {
+      margin: 0;
+      color: var(--color-texto);
+      font-weight: 600;
+      font-size: 0.98rem;
     }
 
     .grid-2 {
       display: grid;
-      grid-template-columns: repeat(2, 1fr);
-      gap: 18px;
+      grid-template-columns: 1fr 1fr;
+      gap: 32px;
+      align-items: start;
     }
 
-    .feature, .pricing-card, .testimonial, .dashboard-card {
-      padding: 22px;
+    .cards {
+      display: grid;
+      gap: 16px;
     }
 
-    .feature h3, .pricing-card h3, .dashboard-card h3 {
-      margin-bottom: 10px;
-    }
-
-    .feature p, .pricing-card p, .testimonial p, .dashboard-card p {
-      color: var(--muted);
-    }
-
-    .pricing-price {
-      font-size: 2rem;
-      font-weight: bold;
-      margin: 10px 0;
-      color: var(--white);
-    }
-
-    .list {
-      margin: 16px 0;
-      padding-left: 18px;
-      color: var(--muted);
-    }
-
-    .cta {
-      padding: 40px 0;
-    }
-
-    .footer-card {
+    .card {
+      background: rgba(255,255,255,0.56);
+      border: 1px solid var(--color-borde);
+      border-radius: var(--radio-mediano);
       padding: 28px;
-      margin: 24px 0 34px;
+      box-shadow: 0 10px 25px rgba(62,39,35,0.04);
+    }
+
+    .card h3 {
+      margin-bottom: 10px;
+      font-size: 1.1rem;
+      font-weight: 800;
+    }
+
+    .card p,
+    .card li {
+      color: var(--color-secundario);
+    }
+
+    .valores {
+      list-style: none;
+      display: grid;
+      gap: 10px;
+    }
+
+    .valores li::before {
+      content: "• ";
+      color: var(--color-acento);
+      font-weight: 800;
+    }
+
+    .bloque-imagen {
+      min-height: 540px;
+      border-radius: 30px;
+      overflow: hidden;
+      box-shadow: var(--sombra);
+    }
+
+    .proyectos {
+      display: grid;
+      grid-template-columns: 0.95fr 1.05fr;
+      gap: 32px;
+      align-items: start;
+    }
+
+    .lista-proyectos {
+      display: grid;
+      gap: 16px;
+    }
+
+    .proyecto {
+      background: rgba(255,255,255,0.56);
+      border: 1px solid var(--color-borde);
+      border-radius: 24px;
+      padding: 18px;
+    }
+
+    .proyecto .imagen {
+      height: 220px;
+      border-radius: 18px;
+      overflow: hidden;
+      margin-bottom: 14px;
+    }
+
+    .proyecto h3 {
+      margin-bottom: 8px;
+      font-size: 1.08rem;
+      font-weight: 800;
+    }
+
+    .proyecto p {
+      color: var(--color-secundario);
+    }
+
+    .contacto-box {
+      margin-top: 50px;
+      background: var(--color-texto);
+      color: white;
+      border-radius: 30px;
+      padding: 34px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 24px;
+      flex-wrap: wrap;
+      box-shadow: var(--sombra);
+    }
+
+    .contacto-box p {
+      color: rgba(255,255,255,0.78);
+      max-width: 58ch;
+    }
+
+    .contacto-box .boton-secundario {
+      color: white;
+      border-color: rgba(255,255,255,0.22);
+      background: rgba(255,255,255,0.08);
+    }
+
+    footer {
+      padding: 24px 0 40px;
+      border-top: 1px solid rgba(62,39,35,0.08);
+    }
+
+    .footer-row {
       display: flex;
       justify-content: space-between;
       align-items: center;
-      gap: 20px;
+      gap: 16px;
       flex-wrap: wrap;
+      color: var(--color-secundario);
     }
 
-    .muted {
-      color: var(--muted);
-    }
-
-    .editor-bar {
-      position: fixed;
-      right: 16px;
-      bottom: 16px;
-      z-index: 99;
+    .footer-brand {
       display: flex;
-      gap: 10px;
-      flex-wrap: wrap;
-      justify-content: flex-end;
-    }
-
-    .editor-bar button {
-      border-radius: 999px;
-      padding: 10px 14px;
-      border: none;
-      cursor: pointer;
-      font-weight: bold;
-      box-shadow: var(--shadow);
-    }
-
-    .edit-btn { background: #f59e0b; color: #1f2937; }
-    .save-btn { background: #3b82f6; color: white; }
-    .reset-btn { background: var(--danger); color: white; }
-
-    .editable-on [data-editable="true"] {
-      outline: 2px dashed rgba(245, 158, 11, .8);
-      outline-offset: 4px;
-      border-radius: 8px;
-      cursor: text;
-    }
-
-    .auth-modal {
-      position: fixed;
-      inset: 0;
-      background: rgba(0,0,0,.62);
-      display: none;
       align-items: center;
-      justify-content: center;
-      z-index: 100;
-      padding: 20px;
+      gap: 12px;
+      color: var(--color-texto);
+      font-weight: 800;
+      letter-spacing: 0.16em;
     }
 
-    .auth-modal.active {
-      display: flex;
-    }
-
-    .auth-card {
-      width: min(460px, 100%);
-      background: #111827;
-      border: 1px solid rgba(255,255,255,.08);
-      border-radius: 18px;
-      padding: 24px;
-      box-shadow: var(--shadow);
-    }
-
-    .auth-card h3 {
-      margin-bottom: 14px;
-    }
-
-    .tabs {
-      display: flex;
-      gap: 10px;
-      margin-bottom: 16px;
-    }
-
-    .tab {
-      flex: 1;
-      padding: 10px;
-      border-radius: 12px;
-      border: 1px solid rgba(255,255,255,.1);
-      background: rgba(255,255,255,.04);
-      color: var(--text);
-      cursor: pointer;
-    }
-
-    .tab.active {
-      background: var(--primary);
-      color: #052e16;
-      border-color: transparent;
-      font-weight: bold;
-    }
-
-    .form-group {
+    /* PANEL EDITOR */
+    .editor-toolbar {
+      position: fixed;
+      right: 18px;
+      top: 50%;
+      transform: translateY(-50%);
+      z-index: 999;
       display: flex;
       flex-direction: column;
-      gap: 7px;
-      margin-bottom: 14px;
-    }
-
-    .form-group input {
-      padding: 12px 14px;
-      border-radius: 12px;
-      border: 1px solid rgba(255,255,255,.1);
-      background: rgba(255,255,255,.04);
-      color: var(--text);
-    }
-
-    .form-row {
-      display: flex;
       gap: 10px;
-      flex-wrap: wrap;
     }
 
-    .form-row .btn, .form-row .btn.secondary {
-      flex: 1;
+    .editor-btn {
+      min-width: 170px;
+      border: 1px solid var(--color-borde);
+      border-radius: 18px;
+      padding: 14px 16px;
+      background: rgba(255,255,255,0.92);
+      color: var(--color-texto);
+      font-weight: 700;
+      cursor: pointer;
+      box-shadow: var(--sombra);
+      transition: 0.25s ease;
     }
 
-    .dashboard {
-      display: none;
-      padding: 24px 0 40px;
+    .editor-btn:hover {
+      transform: translateY(-2px);
     }
 
-    .dashboard.active {
-      display: block;
+    .editor-btn.activo {
+      background: var(--color-texto);
+      color: white;
     }
 
-    .dashboard-grid {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 16px;
-      margin-top: 18px;
+    .editable-on [data-editable="true"] {
+      outline: 2px dashed rgba(184, 155, 122, 0.9);
+      outline-offset: 6px;
+      cursor: text;
+      border-radius: 8px;
+      transition: 0.2s ease;
     }
 
-    .badge {
-      display: inline-block;
-      padding: 6px 10px;
+    .editable-on [data-editable="true"]:hover {
+      background: rgba(255,255,255,0.45);
+    }
+
+    [contenteditable="true"] {
+      caret-color: var(--color-texto);
+    }
+
+    .editor-aviso {
+      position: fixed;
+      left: 50%;
+      bottom: 24px;
+      transform: translateX(-50%);
+      background: rgba(62, 39, 35, 0.92);
+      color: white;
+      padding: 12px 18px;
       border-radius: 999px;
-      background: rgba(59,130,246,.16);
-      color: #93c5fd;
-      font-size: .88rem;
-      margin-top: 8px;
+      font-size: 0.95rem;
+      z-index: 999;
+      opacity: 0;
+      pointer-events: none;
+      transition: 0.3s ease;
     }
 
-    .notice {
-      margin-top: 14px;
-      padding: 12px 14px;
-      border-radius: 12px;
-      background: rgba(59,130,246,.12);
-      color: #bfdbfe;
-      font-size: .95rem;
+    .editor-aviso.mostrar {
+      opacity: 1;
     }
 
-    .small {
-      font-size: .9rem;
-    }
-
-    @media (max-width: 900px) {
-      .hero-grid, .grid-3, .grid-2, .dashboard-grid {
+    @media (max-width: 1024px) {
+      .hero-grid,
+      .grid-2,
+      .proyectos {
         grid-template-columns: 1fr;
       }
 
-      .topbar-inner {
+      .hero-imagen,
+      .bloque-imagen {
+        min-height: 420px;
+      }
+
+      .editor-toolbar {
+        top: auto;
+        bottom: 16px;
+        right: 16px;
+        transform: none;
+      }
+    }
+
+    @media (max-width: 720px) {
+      .menu {
+        display: none;
+      }
+
+      .section {
+        padding: 80px 0;
+      }
+
+      .hero {
+        padding-top: 40px;
+      }
+
+      .botones,
+      .hero-cards {
         flex-direction: column;
-        align-items: flex-start;
+      }
+
+      .boton,
+      .editor-btn {
+        width: 100%;
+      }
+
+      .editor-toolbar {
+        left: 16px;
+        right: 16px;
       }
     }
   </style>
 </head>
 <body>
-  <header class="topbar">
-    <div class="container topbar-inner">
-      <div class="brand" data-editable="true">TuMarca</div>
-      <nav class="nav">
-        <a href="#inicio">Inicio</a>
-        <a href="#beneficios">Beneficios</a>
-        <a href="#planes">Planes</a>
-        <a href="#testimonios">Testimonios</a>
-        <button id="openAuth">Ingresar</button>
+  <!-- BOTONES DE EDICIÓN -->
+  <aside class="editor-toolbar">
+    <button id="toggleEdit" class="editor-btn">Modificar textos</button>
+    <button id="saveChanges" class="editor-btn">Guardar</button>
+    <button id="resetChanges" class="editor-btn">Reiniciar</button>
+  </aside>
+
+  <div id="editorAviso" class="editor-aviso">Cambios guardados</div>
+
+  <header>
+    <div class="container nav">
+      <a href="#inicio" class="brand">
+        <span class="logo"></span>
+        <span data-editable="true">ARBOREA</span>
+      </a>
+
+      <nav class="menu">
+        <a href="#nosotros" data-editable="true">Nosotros</a>
+        <a href="#objetivo" data-editable="true">Objetivo</a>
+        <a href="#proyectos" data-editable="true">Proyectos</a>
+        <a href="#contacto" data-editable="true">Contacto</a>
       </nav>
     </div>
   </header>
 
-  <main id="inicio">
-    <section class="hero">
+  <main>
+    <section class="hero" id="inicio">
       <div class="container hero-grid">
-        <div class="hero-card">
-          <span class="tag" data-editable="true">Landing editable y moderna</span>
-          <h1 data-editable="true">Crea una presencia profesional sin complicarte</h1>
-          <p data-editable="true">Esta página está hecha para que una persona novata pueda cambiar textos fácilmente. También incluye un acceso básico para que otras personas puedan registrarse e iniciar sesión en este mismo navegador.</p>
-          <div class="hero-actions">
-            <a href="#planes" class="btn" data-editable="true">Empezar ahora</a>
-            <a href="#beneficios" class="btn secondary" data-editable="true">Ver más</a>
+        <div>
+          <div class="tag" data-editable="true">Constructora en Chihuahua</div>
+          <h1 data-editable="true">Construyendo el futuro de Parral</h1>
+          <p data-editable="true">
+            En Arborea desarrollamos proyectos arquitectónicos y constructivos con enfoque
+            minimalista, funcional y contemporáneo para transformar espacios en Hidalgo del Parral.
+          </p>
+
+          <div class="botones">
+            <a href="#proyectos" class="boton boton-primario" data-editable="true">Nuestros Proyectos</a>
+            <a href="#contacto" class="boton boton-secundario" data-editable="true">Contacto</a>
           </div>
-          <div class="stats">
-            <div class="stat">
-              <strong data-editable="true">+500</strong>
-              <span class="muted" data-editable="true">usuarios</span>
+
+          <div class="hero-cards">
+            <div class="mini-card">
+              <span data-editable="true">Especialidad</span>
+              <strong data-editable="true">Arquitectura moderna</strong>
             </div>
-            <div class="stat">
-              <strong data-editable="true">24/7</strong>
-              <span class="muted" data-editable="true">disponibilidad</span>
+            <div class="mini-card">
+              <span data-editable="true">Ubicación</span>
+              <strong data-editable="true">Hidalgo del Parral</strong>
             </div>
-            <div class="stat">
-              <strong data-editable="true">Fácil</strong>
-              <span class="muted" data-editable="true">de editar</span>
-            </div>
-          </div>
-        </div>
-        <div class="panel">
-          <div class="mockup">
-            <div class="mockup-box">
-              <h3 data-editable="true">Panel de ejemplo</h3>
-              <p class="muted" data-editable="true">Puedes usar este espacio para mostrar tu producto, una imagen, una promoción o un formulario.</p>
-            </div>
-            <div class="mockup-box">
-              <p data-editable="true">Aquí podrías poner una captura de pantalla, una foto de tu negocio o un video incrustado.</p>
-            </div>
-            <div class="mockup-box">
-              <p data-editable="true">Todo el contenido marcado como editable se puede cambiar con el botón de edición.</p>
+            <div class="mini-card">
+              <span data-editable="true">Estilo</span>
+              <strong data-editable="true">Minimalismo elegante</strong>
             </div>
           </div>
         </div>
-      </div>
-    </section>
 
-    <section id="beneficios">
-      <div class="container">
-        <div class="section-title">
-          <h2 data-editable="true">Beneficios principales</h2>
-          <p data-editable="true">Puedes personalizar esta landing para un negocio, portafolio, tienda, servicio profesional o proyecto escolar.</p>
-        </div>
-        <div class="grid-3">
-          <article class="feature">
-            <h3 data-editable="true">Fácil de modificar</h3>
-            <p data-editable="true">Activa el modo edición y cambia títulos, párrafos y botones sin tocar código.</p>
-          </article>
-          <article class="feature">
-            <h3 data-editable="true">Diseño adaptable</h3>
-            <p data-editable="true">Se ve bien en celular, tablet y computadora.</p>
-          </article>
-          <article class="feature">
-            <h3 data-editable="true">Acceso básico integrado</h3>
-            <p data-editable="true">Incluye registro e inicio de sesión usando almacenamiento local del navegador.</p>
-          </article>
+        <div class="hero-imagen">
+          <img src="https://images.unsplash.com/photo-1511818966892-d7d671e672a2?auto=format&fit=crop&w=1200&q=80" alt="Arquitectura moderna" />
+          <div class="nota-flotante">
+            <small data-editable="true">Arborea</small>
+            <p data-editable="true">Diseño, construcción y visión para el crecimiento de Parral.</p>
+          </div>
         </div>
       </div>
     </section>
 
-    <section id="planes">
-      <div class="container">
-        <div class="section-title">
-          <h2 data-editable="true">Planes o paquetes</h2>
-          <p data-editable="true">Puedes reemplazar esta sección por tus servicios, productos o precios reales.</p>
+    <section class="section" id="nosotros">
+      <div class="container grid-2">
+        <div>
+          <div class="tag" data-editable="true">Sobre Nosotros</div>
+          <h2 class="titulo-seccion" data-editable="true">Una constructora con identidad clara</h2>
+          <p class="texto-seccion" data-editable="true">
+            Nuestro propósito es ofrecer una propuesta constructiva sobria,
+            funcional y de alta presencia visual, enfocada en crear espacios duraderos y bien pensados.
+          </p>
         </div>
-        <div class="grid-3">
-          <article class="pricing-card">
-            <h3 data-editable="true">Básico</h3>
-            <div class="pricing-price" data-editable="true">$199</div>
-            <p data-editable="true">Ideal para empezar</p>
-            <ul class="list">
-              <li data-editable="true">1 servicio principal</li>
-              <li data-editable="true">Soporte por mensaje</li>
-              <li data-editable="true">Cambios básicos</li>
+
+        <div class="cards">
+          <div class="card">
+            <h3 data-editable="true">Misión</h3>
+            <p data-editable="true">
+              Diseñar y construir espacios de calidad que mejoren la vida de las personas y aporten valor al entorno urbano de la región.
+            </p>
+          </div>
+
+          <div class="card">
+            <h3 data-editable="true">Visión</h3>
+            <p data-editable="true">
+              Ser una constructora reconocida en Chihuahua por su diseño contemporáneo, confianza profesional y excelencia en cada proyecto.
+            </p>
+          </div>
+
+          <div class="card">
+            <h3 data-editable="true">Valores</h3>
+            <ul class="valores">
+              <li data-editable="true">Calidad</li>
+              <li data-editable="true">Compromiso</li>
+              <li data-editable="true">Transparencia</li>
+              <li data-editable="true">Diseño funcional</li>
             </ul>
-            <button class="btn" data-editable="true">Elegir</button>
-          </article>
-          <article class="pricing-card">
-            <h3 data-editable="true">Pro</h3>
-            <div class="pricing-price" data-editable="true">$499</div>
-            <p data-editable="true">Para crecer más rápido</p>
-            <ul class="list">
-              <li data-editable="true">Más funciones</li>
-              <li data-editable="true">Atención prioritaria</li>
-              <li data-editable="true">Personalización ampliada</li>
-            </ul>
-            <button class="btn" data-editable="true">Elegir</button>
-          </article>
-          <article class="pricing-card">
-            <h3 data-editable="true">Premium</h3>
-            <div class="pricing-price" data-editable="true">$999</div>
-            <p data-editable="true">Para una presencia completa</p>
-            <ul class="list">
-              <li data-editable="true">Diseño avanzado</li>
-              <li data-editable="true">Mayor soporte</li>
-              <li data-editable="true">Asesoría personalizada</li>
-            </ul>
-            <button class="btn" data-editable="true">Elegir</button>
-          </article>
+          </div>
         </div>
       </div>
     </section>
 
-    <section id="testimonios">
-      <div class="container">
-        <div class="section-title">
-          <h2 data-editable="true">Lo que dice la gente</h2>
-          <p data-editable="true">También puedes usar esta sección para mostrar reseñas, logros o casos de éxito.</p>
+    <section class="section" id="objetivo">
+      <div class="container grid-2">
+        <div class="bloque-imagen">
+          <img src="https://images.unsplash.com/photo-1502005097973-6a7082348e28?auto=format&fit=crop&w=1200&q=80" alt="Proyecto minimalista" />
         </div>
-        <div class="grid-2">
-          <article class="testimonial">
-            <p data-editable="true">Muy fácil de usar. Cambié todo el contenido sin saber diseño web.</p>
-            <span class="badge" data-editable="true">Cliente 1</span>
-          </article>
-          <article class="testimonial">
-            <p data-editable="true">La base ya está lista y eso ayuda mucho para empezar rápido.</p>
-            <span class="badge" data-editable="true">Cliente 2</span>
-          </article>
+
+        <div>
+          <div class="tag" data-editable="true">Objetivo</div>
+          <h2 class="titulo-seccion" data-editable="true">Aportar valor real al desarrollo de Chihuahua</h2>
+          <p class="texto-seccion" data-editable="true">
+            El objetivo es impulsar el crecimiento de Hidalgo del Parral y su región a través de proyectos bien ejecutados, estética limpia y soluciones funcionales para vivienda, espacios privados y desarrollos urbanos.
+          </p>
+          <br />
+          <p class="texto-seccion" data-editable="true">
+            Cada obra busca combinar diseño, eficiencia y permanencia, generando espacios que respondan a necesidades actuales y también a la visión del futuro.
+          </p>
         </div>
       </div>
     </section>
 
-    <section class="cta">
+    <section class="section" id="proyectos">
+      <div class="container proyectos">
+        <div>
+          <div class="tag" data-editable="true">Nuestros Proyectos</div>
+          <h2 class="titulo-seccion" data-editable="true">Espacios contemporáneos con carácter</h2>
+          <p class="texto-seccion" data-editable="true">
+            Aquí puedes mostrar proyectos residenciales, comerciales o conceptuales. Las imágenes actuales son placeholders y puedes reemplazarlas por renders o fotografías reales.
+          </p>
+        </div>
+
+        <div class="lista-proyectos">
+          <article class="proyecto">
+            <div class="imagen">
+              <img src="https://images.unsplash.com/photo-1460317442991-0ec209397118?auto=format&fit=crop&w=1200&q=80" alt="Residencia moderna" />
+            </div>
+            <h3 data-editable="true">Residencias contemporáneas</h3>
+            <p data-editable="true">Diseños limpios y funcionales pensados para una vida moderna con identidad arquitectónica.</p>
+          </article>
+
+          <article class="proyecto">
+            <div class="imagen">
+              <img src="https://images.unsplash.com/photo-1494526585095-c41746248156?auto=format&fit=crop&w=1200&q=80" alt="Desarrollo arquitectónico" />
+            </div>
+            <h3 data-editable="true">Desarrollos de alto valor visual</h3>
+            <p data-editable="true">Propuestas que integran presencia urbana, materiales nobles y una ejecución bien estructurada.</p>
+          </article>
+        </div>
+      </div>
+
       <div class="container">
-        <div class="footer-card">
+        <div class="contacto-box" id="contacto">
           <div>
-            <h2 data-editable="true">¿Listo para personalizar tu página?</h2>
-            <p class="muted" data-editable="true">Puedes cambiar textos, precios, títulos, colores y usar esta plantilla como base de tu proyecto.</p>
+            <h3 data-editable="true">Hablemos de tu próximo proyecto</h3>
+            <p data-editable="true">
+              Puedes sustituir este bloque por un formulario, un botón de WhatsApp, teléfono, correo o redes sociales.
+            </p>
           </div>
-          <button class="btn" id="openAuthBottom" data-editable="true">Crear cuenta</button>
-        </div>
-      </div>
-    </section>
-
-    <section class="dashboard" id="dashboardSection">
-      <div class="container">
-        <div class="section-title">
-          <h2>Área de usuario</h2>
-          <p class="muted">Se muestra cuando alguien inicia sesión correctamente en este navegador.</p>
-        </div>
-
-        <div class="dashboard-card">
-          <h3 id="welcomeUser">Bienvenido</h3>
-          <p>Esta es una zona básica de ejemplo. Puedes convertirla en panel, perfil, membresía, cursos, archivos o pedidos.</p>
-          <div class="notice">
-            Importante: el sistema de usuarios de esta demo guarda la información solo en el navegador. Para usuarios reales desde internet, necesitas base de datos y backend.
-          </div>
-        </div>
-
-        <div class="dashboard-grid">
-          <article class="dashboard-card">
-            <h3>Perfil</h3>
-            <p>Visualiza información del usuario conectado.</p>
-          </article>
-          <article class="dashboard-card">
-            <h3>Contenido privado</h3>
-            <p>Muestra información solo al iniciar sesión.</p>
-          </article>
-          <article class="dashboard-card">
-            <h3>Configuración</h3>
-            <p>Desde aquí podrías agregar edición avanzada o preferencias.</p>
-          </article>
-        </div>
-
-        <div style="margin-top: 18px; display: flex; gap: 10px; flex-wrap: wrap;">
-          <button class="btn secondary" id="logoutBtn">Cerrar sesión</button>
+          <a href="mailto:contacto@habitat.com" class="boton boton-secundario" data-editable="true">contacto@habitat.com</a>
         </div>
       </div>
     </section>
   </main>
 
-  <div class="auth-modal" id="authModal">
-    <div class="auth-card">
-      <h3>Acceso de usuarios</h3>
-      <div class="tabs">
-        <button class="tab active" id="tabLogin">Iniciar sesión</button>
-        <button class="tab" id="tabRegister">Registrarse</button>
+  <footer>
+    <div class="container footer-row">
+      <div class="footer-brand">
+        <span class="logo"></span>
+        <span data-editable="true">ARBOREA</span>
       </div>
-
-      <form id="authForm">
-        <div class="form-group" id="nameGroup" style="display:none;">
-          <label for="name">Nombre</label>
-          <input type="text" id="name" placeholder="Tu nombre" />
-        </div>
-
-        <div class="form-group">
-          <label for="email">Correo</label>
-          <input type="email" id="email" placeholder="correo@ejemplo.com" required />
-        </div>
-
-        <div class="form-group">
-          <label for="password">Contraseña</label>
-          <input type="password" id="password" placeholder="Tu contraseña" required />
-        </div>
-
-        <div class="form-row">
-          <button type="submit" class="btn" id="submitAuth">Entrar</button>
-          <button type="button" class="btn secondary" id="closeAuth">Cerrar</button>
-        </div>
-      </form>
-
-      <p class="notice small" id="authMessage">Puedes crear usuarios de prueba desde este navegador.</p>
+      <p data-editable="true">Hidalgo del Parral, Chihuahua</p>
     </div>
-  </div>
-
-  <div class="editor-bar">
-    <button class="edit-btn" id="toggleEdit">Activar edición</button>
-    <button class="save-btn" id="saveContent">Guardar cambios</button>
-    <button class="reset-btn" id="resetContent">Restablecer</button>
-  </div>
+  </footer>
 
   <script>
-    const body = document.body;
-    const editableElements = [...document.querySelectorAll('[data-editable="true"]')];
+    const editableElements = document.querySelectorAll('[data-editable="true"]');
     const toggleEditBtn = document.getElementById('toggleEdit');
-    const saveContentBtn = document.getElementById('saveContent');
-    const resetContentBtn = document.getElementById('resetContent');
+    const saveChangesBtn = document.getElementById('saveChanges');
+    const resetChangesBtn = document.getElementById('resetChanges');
+    const aviso = document.getElementById('editorAviso');
+    const STORAGE_KEY = 'habitatLandingEditableContent';
+    const editableModeKey = 'habitatLandingEditableMode';
 
-    const authModal = document.getElementById('authModal');
-    const openAuth = document.getElementById('openAuth');
-    const openAuthBottom = document.getElementById('openAuthBottom');
-    const closeAuth = document.getElementById('closeAuth');
-    const authForm = document.getElementById('authForm');
-    const authMessage = document.getElementById('authMessage');
-    const tabLogin = document.getElementById('tabLogin');
-    const tabRegister = document.getElementById('tabRegister');
-    const nameGroup = document.getElementById('nameGroup');
-    const submitAuth = document.getElementById('submitAuth');
-    const dashboardSection = document.getElementById('dashboardSection');
-    const welcomeUser = document.getElementById('welcomeUser');
-    const logoutBtn = document.getElementById('logoutBtn');
+    const originalContent = Array.from(editableElements).map((el) => el.innerHTML);
+    let editMode = false;
 
-    let isEditMode = false;
-    let authMode = 'login';
+    function mostrarAviso(texto) {
+      aviso.textContent = texto;
+      aviso.classList.add('mostrar');
+      clearTimeout(window.__editorAvisoTimeout);
+      window.__editorAvisoTimeout = setTimeout(() => {
+        aviso.classList.remove('mostrar');
+      }, 1800);
+    }
 
-    const STORAGE_KEY_CONTENT = 'landingEditableContent_v1';
-    const STORAGE_KEY_USERS = 'landingUsers_v1';
-    const STORAGE_KEY_SESSION = 'landingSession_v1';
-
-    const defaultContent = editableElements.map((el, index) => ({
-      index,
-      html: el.innerHTML
-    }));
-
-    function enableEditMode() {
-      isEditMode = !isEditMode;
-      body.classList.toggle('editable-on', isEditMode);
-      editableElements.forEach(el => {
-        el.contentEditable = isEditMode;
+    function activarEdicion() {
+      editMode = true;
+      document.body.classList.add('editable-on');
+      editableElements.forEach((el) => {
+        el.setAttribute('contenteditable', 'true');
+        el.setAttribute('spellcheck', 'false');
       });
-      toggleEditBtn.textContent = isEditMode ? 'Desactivar edición' : 'Activar edición';
+      toggleEditBtn.classList.add('activo');
+      toggleEditBtn.textContent = 'Modo edición activo';
+      localStorage.setItem(editableModeKey, 'true');
+      mostrarAviso('Ahora puedes editar los textos');
     }
 
-    function saveContent() {
-      const content = editableElements.map((el, index) => ({
-        index,
-        html: el.innerHTML
-      }));
-      localStorage.setItem(STORAGE_KEY_CONTENT, JSON.stringify(content));
-      alert('Cambios guardados en este navegador.');
+    function desactivarEdicion() {
+      editMode = false;
+      document.body.classList.remove('editable-on');
+      editableElements.forEach((el) => {
+        el.removeAttribute('contenteditable');
+      });
+      toggleEditBtn.classList.remove('activo');
+      toggleEditBtn.textContent = 'Modificar textos';
+      localStorage.setItem(editableModeKey, 'false');
     }
 
-    function loadContent() {
-      const saved = localStorage.getItem(STORAGE_KEY_CONTENT);
+    function toggleEdicion() {
+      if (editMode) {
+        desactivarEdicion();
+        mostrarAviso('Modo edición desactivado');
+      } else {
+        activarEdicion();
+      }
+    }
+
+    function guardarCambios() {
+      const content = Array.from(editableElements).map((el) => el.innerHTML);
+      localStorage.setItem(STORAGE_KEY, JSON.stringify(content));
+      desactivarEdicion();
+      mostrarAviso('Cambios guardados');
+    }
+
+    function cargarCambios() {
+      const saved = localStorage.getItem(STORAGE_KEY);
       if (!saved) return;
       try {
-        const parsed = JSON.parse(saved);
-        parsed.forEach(item => {
-          if (editableElements[item.index]) {
-            editableElements[item.index].innerHTML = item.html;
+        const content = JSON.parse(saved);
+        editableElements.forEach((el, index) => {
+          if (content[index] !== undefined) {
+            el.innerHTML = content[index];
           }
         });
       } catch (error) {
-        console.error('Error al cargar contenido guardado:', error);
+        console.error('No se pudieron cargar los cambios guardados', error);
       }
     }
 
-    function resetContent() {
-      const confirmed = confirm('¿Seguro que quieres restablecer el contenido original?');
-      if (!confirmed) return;
-
-      defaultContent.forEach(item => {
-        if (editableElements[item.index]) {
-          editableElements[item.index].innerHTML = item.html;
-        }
+    function reiniciarCambios() {
+      editableElements.forEach((el, index) => {
+        el.innerHTML = originalContent[index];
       });
-      localStorage.removeItem(STORAGE_KEY_CONTENT);
-      alert('Contenido restablecido.');
+      localStorage.removeItem(STORAGE_KEY);
+      desactivarEdicion();
+      mostrarAviso('Contenido restaurado al original');
     }
 
-    function openAuthModal() {
-      authModal.classList.add('active');
+    toggleEditBtn.addEventListener('click', toggleEdicion);
+    saveChangesBtn.addEventListener('click', guardarCambios);
+    resetChangesBtn.addEventListener('click', reiniciarCambios);
+
+    cargarCambios();
+
+    if (localStorage.getItem(editableModeKey) === 'true') {
+      activarEdicion();
+    } else {
+      desactivarEdicion();
     }
-
-    function closeAuthModal() {
-      authModal.classList.remove('active');
-      authForm.reset();
-      authMessage.textContent = 'Puedes crear usuarios de prueba desde este navegador.';
-    }
-
-    function setAuthMode(mode) {
-      authMode = mode;
-      const isRegister = mode === 'register';
-      nameGroup.style.display = isRegister ? 'flex' : 'none';
-      submitAuth.textContent = isRegister ? 'Crear cuenta' : 'Entrar';
-      tabLogin.classList.toggle('active', !isRegister);
-      tabRegister.classList.toggle('active', isRegister);
-      authMessage.textContent = isRegister
-        ? 'Crea un usuario local de prueba.'
-        : 'Ingresa con un usuario ya registrado en este navegador.';
-    }
-
-    function getUsers() {
-      return JSON.parse(localStorage.getItem(STORAGE_KEY_USERS) || '[]');
-    }
-
-    function saveUsers(users) {
-      localStorage.setItem(STORAGE_KEY_USERS, JSON.stringify(users));
-    }
-
-    function saveSession(user) {
-      localStorage.setItem(STORAGE_KEY_SESSION, JSON.stringify(user));
-    }
-
-    function getSession() {
-      return JSON.parse(localStorage.getItem(STORAGE_KEY_SESSION) || 'null');
-    }
-
-    function clearSession() {
-      localStorage.removeItem(STORAGE_KEY_SESSION);
-    }
-
-    function updateUIFromSession() {
-      const session = getSession();
-      if (session) {
-        openAuth.textContent = 'Mi cuenta';
-        welcomeUser.textContent = `Bienvenido, ${session.name || session.email}`;
-        dashboardSection.classList.add('active');
-      } else {
-        openAuth.textContent = 'Ingresar';
-        welcomeUser.textContent = 'Bienvenido';
-        dashboardSection.classList.remove('active');
-      }
-    }
-
-    authForm.addEventListener('submit', function (e) {
-      e.preventDefault();
-
-      const name = document.getElementById('name').value.trim();
-      const email = document.getElementById('email').value.trim().toLowerCase();
-      const password = document.getElementById('password').value;
-
-      const users = getUsers();
-
-      if (authMode === 'register') {
-        if (!name) {
-          authMessage.textContent = 'Escribe un nombre.';
-          return;
-        }
-
-        const exists = users.some(user => user.email === email);
-        if (exists) {
-          authMessage.textContent = 'Ese correo ya está registrado.';
-          return;
-        }
-
-        const newUser = { name, email, password };
-        users.push(newUser);
-        saveUsers(users);
-        saveSession(newUser);
-        authMessage.textContent = 'Cuenta creada correctamente.';
-        updateUIFromSession();
-        setTimeout(closeAuthModal, 400);
-        return;
-      }
-
-      const user = users.find(user => user.email === email && user.password === password);
-      if (!user) {
-        authMessage.textContent = 'Correo o contraseña incorrectos.';
-        return;
-      }
-
-      saveSession(user);
-      authMessage.textContent = 'Inicio de sesión correcto.';
-      updateUIFromSession();
-      setTimeout(closeAuthModal, 400);
-    });
-
-    toggleEditBtn.addEventListener('click', enableEditMode);
-    saveContentBtn.addEventListener('click', saveContent);
-    resetContentBtn.addEventListener('click', resetContent);
-    openAuth.addEventListener('click', openAuthModal);
-    openAuthBottom.addEventListener('click', openAuthModal);
-    closeAuth.addEventListener('click', closeAuthModal);
-    tabLogin.addEventListener('click', () => setAuthMode('login'));
-    tabRegister.addEventListener('click', () => setAuthMode('register'));
-    logoutBtn.addEventListener('click', () => {
-      clearSession();
-      updateUIFromSession();
-      alert('Sesión cerrada.');
-    });
-
-    authModal.addEventListener('click', function(e) {
-      if (e.target === authModal) closeAuthModal();
-    });
-
-    loadContent();
-    updateUIFromSession();
   </script>
 </body>
 </html>
